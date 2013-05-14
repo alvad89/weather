@@ -9,5 +9,7 @@ public class Main {
         readXML.read();
         ReadJson json = new ReadJson();
         json.getJson();
+        ForecasIO forecasIO = new ForecasIO();
+        forecasIO.getForecastIO();
     }
 }

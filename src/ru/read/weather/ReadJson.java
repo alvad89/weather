@@ -25,29 +25,39 @@ public class ReadJson {
         List<String> info = new ArrayList<String>();
         json="";
         try {
+            try{
             url = new URL("http://api.openweathermap.org/data/2.1/weather/city/1508291?units=metric");
-            InputStream in = url.openStream();
-            Scanner scanner = new Scanner(in);
+            in = url.openStream();
+            scanner = new Scanner(in);
             while (scanner.hasNext()){
                 json=json+scanner.next();
             }
-        JSONParser parser = new JSONParser();
+            JSONParser parser = new JSONParser();
             Object obj = parser.parse(json);
             JSONObject jsonObject = (JSONObject) obj;
             info.add(jsonObject.get("date").toString());
             JSONObject jsonMain = (JSONObject) jsonObject.get("main");
             info.add(jsonMain.get("temp").toString());
-            info.add(jsonMain.get("pressure").toString());
-            info.add(jsonMain.get("humidity").toString());
-            info.add(jsonMain.get("temp_max").toString());
-            info.add(jsonMain.get("temp_min").toString());
+                JSONArray jsonWeather = (JSONArray) jsonObject.get("weather");
+                JSONObject weather = (JSONObject) jsonWeather.get(0);
+                info.add(weather.get("main").toString());
+
+
+          //  info.add(jsonMain.get("temp_max").toString());
+          //  info.add(jsonMain.get("temp_min").toString());
             JSONObject jsonWind = (JSONObject) jsonObject.get("wind");
             info.add(jsonWind.get("speed").toString());
-            JSONArray jsonWeather = (JSONArray) jsonObject.get("weather");
-            JSONObject weather = (JSONObject) jsonWeather.get(0);
-            info.add(weather.get("main").toString());
-            info.add(weather.get("description").toString());
-        } catch (ParseException e) {
+            info.add(jsonWind.get("deg").toString());
+                info.add(jsonMain.get("pressure").toString());
+                info.add(jsonMain.get("humidity").toString());
+
+
+           // info.add(weather.get("description").toString());
+        }finally {
+               in.close();
+               scanner.close();
+            }}
+        catch (ParseException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (ClassCastException e){
             e.printStackTrace();
@@ -61,5 +71,6 @@ public class ReadJson {
     }
     private URL url;
     private String json;
-
+    private InputStream in;
+    private Scanner scanner;
 }
