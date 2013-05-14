@@ -21,7 +21,7 @@ import java.util.Scanner;
  * To change this template use File | Settings | File Templates.
  */
 public class ReadJson {
-    public void getJson(){
+    public List<String> getJson(){
         List<String> info = new ArrayList<String>();
         json="";
         try {
@@ -32,12 +32,12 @@ public class ReadJson {
             while (scanner.hasNext()){
                 json=json+scanner.next();
             }
-            JSONParser parser = new JSONParser();
-            Object obj = parser.parse(json);
-            JSONObject jsonObject = (JSONObject) obj;
-            info.add(jsonObject.get("date").toString());
-            JSONObject jsonMain = (JSONObject) jsonObject.get("main");
-            info.add(jsonMain.get("temp").toString());
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse(json);
+                JSONObject jsonObject = (JSONObject) obj;
+                info.add(jsonObject.get("date").toString());
+                JSONObject jsonMain = (JSONObject) jsonObject.get("main");
+                info.add(jsonMain.get("temp").toString());
                 JSONArray jsonWeather = (JSONArray) jsonObject.get("weather");
                 JSONObject weather = (JSONObject) jsonWeather.get(0);
                 info.add(weather.get("main").toString());
@@ -66,8 +66,8 @@ public class ReadJson {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        System.out.println(info);
-
+        //System.out.println(info);
+        return info;
     }
     private URL url;
     private String json;
