@@ -1,15 +1,17 @@
 package ru.weather;
 import ru.read.weather.*;
+import ru.write.weather.WriteDB;
 
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
+        WriteDB wr = new WriteDB();
         ReadXML readXML = new ReadXML();
-        readXML.read();
+        wr.write(1,readXML.read());
         ReadJson json = new ReadJson();
-        json.getJson();
+        wr.write(2,json.getJson());
         ForecasIO forecasIO = new ForecasIO();
-        forecasIO.getForecastIO();
+        wr.write(3,forecasIO.getForecastIO());
     }
 }

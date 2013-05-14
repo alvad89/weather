@@ -43,7 +43,10 @@ public class ReadXML {
                     System.out.println("Влажность: "+element.getElementsByTagName("humidity").item(0).getTextContent());
                     System.out.println("Давление в мм: "+element.getElementsByTagName("pressure").item(0).getTextContent());
                     System.out.println("Время: "+element.getElementsByTagName("observation_time").item(0).getTextContent()); */
-                    res.add(element.getElementsByTagName("observation_time").item(0).getTextContent());
+                    //res.add(element.getElementsByTagName("observation_time").item(0).getTextContent());
+                    String s = element.getElementsByTagName("observation_time").item(0).getTextContent();
+                    s = s.replace('T',' ');
+                    res.add(s);
                     res.add(element.getElementsByTagName("temperature").item(0).getTextContent());
                     res.add(element.getElementsByTagName("weather_type").item(0).getTextContent());
                     res.add(element.getElementsByTagName("wind_speed").item(0).getTextContent());
@@ -61,7 +64,6 @@ public class ReadXML {
         }catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        //System.out.println(res);
         return res;
     }
     private URL url;

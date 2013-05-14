@@ -35,7 +35,10 @@ public class ReadJson {
                 JSONParser parser = new JSONParser();
                 Object obj = parser.parse(json);
                 JSONObject jsonObject = (JSONObject) obj;
-                info.add(jsonObject.get("date").toString());
+                String s = jsonObject.get("date").toString();
+                s = s.substring(0,10)+" "+s.substring(10);
+                //info.add(jsonObject.get("date").toString());
+                info.add(s);
                 JSONObject jsonMain = (JSONObject) jsonObject.get("main");
                 info.add(jsonMain.get("temp").toString());
                 JSONArray jsonWeather = (JSONArray) jsonObject.get("weather");
@@ -66,7 +69,6 @@ public class ReadJson {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        //System.out.println(info);
         return info;
     }
     private URL url;

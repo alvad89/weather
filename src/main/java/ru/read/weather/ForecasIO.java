@@ -59,7 +59,6 @@ public class ForecasIO {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        //System.out.println(res);
         return res;
     }
     private URL url;
