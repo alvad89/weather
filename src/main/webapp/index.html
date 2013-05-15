@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Добро пожаловать!</title>
+    
+	<link rel="stylesheet" href="css/stylesheet.css" />
+    <script src="scripts/jquery-1.9.0.js"></script>
+    <script src="scripts/script.js"></script>
+
+
+</head>
+<body>
+
+
+<h1>Погода</h1>
+<h3>Челябинск</h3>
+<form>
+    <p><h3>Выберите сайт</h3>
+        <label>
+            <select name="sel">
+                <option selected value="s1">Yandex</option>
+                <option value="s2">OpenWeather</option>
+                <option value="s3">Forecast.io</option>
+            </select>
+        </label>
+    </p>
+</form>
+<script>
+    $(function() {
+        $("li").click(function(e) {
+            e.preventDefault();
+            $("li").removeClass("active");
+            $(this).addClass("active");
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $('select[name="sel"]').change(function(){
+        console.log("ok!")
+
+    });
+   // if($('sel').value=="s2") console.log("ok!!!");
+    $.ajax( 'services/currentVol/'+2, {
+        dataType:'json',
+        type:'GET',
+        success:function ( data1 ) {
+            tableForCurrent.prepend(function(j){
+                var result = '<tfoot><tr>';
+                for(var i=0; i<data1.workVol.length; i++){
+                    result= result+'<th>'+data1.workVol[i].timeCorrector+'</th>';
+                }
+                result=result+'</tr></tfoot><tbody><tr>';
+                for(var i=0; i<data1.workVol.length; i++){
+                    result=result+'<td>'+data1.workVol[i].current+'</td>';
+                }
+                result=result +'</tr></tbody>';
+                return result;
+            });
+        }
+    }).error( function()  {
+                console.log("error");
+            });
+
+</script>
+</body>
+</html>

@@ -1,8 +1,12 @@
 package ru.weather;
-import com.sun.net.httpserver.HttpServer;
-import java.io.IOException;
+
+import ru.read.weather.ForecasIO;
+import ru.read.weather.ReadJson;
+import ru.read.weather.ReadXML;
+import ru.write.weather.WriteDB;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Path;
 
@@ -13,17 +17,37 @@ import javax.ws.rs.Path;
  * Time: 15:14
  * To change this template use File | Settings | File Templates.
  */
-// The Java class will be hosted at the URI path "/helloworld"
-@Path("/helloworld")
+@Path("/")
 public class RestWeather {
-    // The Java method will process HTTP GET requests
+    private ConnectDB connectDB;
+    public RestWeather(){
+        connectDB = new ConnectDB();
+    }
+    public RestWeather(ConnectDB db){
+        this.connectDB = db;
+    }
+
     @GET
-    // The Java method will produce content identified by the MIME Media type "text/plain"
-    @Produces("text/plain")
-    public String getClichedMessage() {
-        // Return some cliched textual content
-        return "Hello World";
+    @Path("site/{id}")
+    @Produces("application/json")
+    public String getWeather(@PathParam(value = "id") Integer id) {
+        connectDB = new ConnectDB();
+        String s = connectDB.getWeather(id).toString();
+        return s;
     }
 
-
+    @GET
+    @Path("refresh")
+    @Produces("application/json")
+    public String refresh(){
+        WriteDB wr = new WriteDB();
+        ReadXML readXML = new ReadXML();
+        wr.write(1,readXML.read());
+        ReadJson json = new ReadJson();
+        wr.write(2,json.getJson());
+        ForecasIO forecasIO = new ForecasIO();
+        wr.write(3,forecasIO.getForecastIO());
+        return "true";
     }
+}
+

@@ -20,7 +20,13 @@ public class ConnectDB {
                 state.setInt(1,id);
                 ResultSet rst = state.executeQuery();
                 while (rst.next()){
-
+                    jsonObject.put("date",rst.getString(1));
+                    jsonObject.put("temper",rst.getString(2));
+                    jsonObject.put("typeWeather",rst.getString(3));
+                    jsonObject.put("speedWing",rst.getString(4));
+                    jsonObject.put("degWing",rst.getString(5));
+                    jsonObject.put("pressure",rst.getString(6));
+                    jsonObject.put("humidity",rst.getString(7));
                 }
             }
             finally {

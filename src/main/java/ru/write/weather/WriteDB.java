@@ -20,7 +20,7 @@ public class WriteDB {
                   state.setInt(1,1);
                   state.setInt(2,id);
                   if (id == 3){
-                      state.setTimestamp(3, new Timestamp(Long.valueOf(astring.get(0))));
+                      state.setTimestamp(3, new Timestamp(1000*Long.valueOf(astring.get(0))));
                       if (astring.size()>8){
                       state.setBigDecimal(10,BigDecimal.valueOf(Double.valueOf(astring.get(7))));
                       state.setBigDecimal(11,BigDecimal.valueOf(Double.valueOf(astring.get(8))));
@@ -52,6 +52,7 @@ public class WriteDB {
           }
       }
 
+
     private Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/weather?useUnicode=true&characterEncoding=utf8";
         String username = "pogoda";
@@ -60,3 +61,8 @@ public class WriteDB {
     }
 
 }
+
+/*
+
+ */
+
