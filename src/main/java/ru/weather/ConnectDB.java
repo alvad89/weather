@@ -27,6 +27,13 @@ public class ConnectDB {
                     jsonObject.put("degWing",rst.getString(5));
                     jsonObject.put("pressure",rst.getString(6));
                     jsonObject.put("humidity",rst.getString(7));
+                    if (id == 3){
+                        jsonObject.put("cloudCover",rst.getString(8));
+                        jsonObject.put("visibility",rst.getString(9));
+                        jsonObject.put("precipIntensity",rst.getString(10));
+                        jsonObject.put("dewPoint",rst.getString(11));
+                        jsonObject.put("ozone",rst.getString(12));
+                    }
                 }
             }
             finally {
