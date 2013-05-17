@@ -1,5 +1,4 @@
 package ru.write.weather;
-
 import ru.read.weather.ForecasIO;
 import ru.read.weather.ReadJson;
 import ru.read.weather.ReadXML;
@@ -13,7 +12,7 @@ import ru.read.weather.ReadXML;
  * To change this template use File | Settings | File Templates.
  */
 public class Refresh {
-    public void refresh(final Long period){
+    public void refresh(Long period){
         per = period;
         start();
     }
@@ -23,15 +22,12 @@ public class Refresh {
     }
     public void start(){
         Thread thisThread = Thread.currentThread();
-        System.out.println("OK!");
         while (potok == Thread.currentThread()){
-            System.out.println("OK!!!");
             try {
                 Thread.sleep(per);
             } catch (InterruptedException e) {
             }
             write();
-
         }
     }
     public void write(){

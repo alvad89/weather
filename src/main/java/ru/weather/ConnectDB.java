@@ -28,7 +28,6 @@ public class ConnectDB {
                 ResultSet rst = state.executeQuery();
                 while (rst.next()){
                     JSONObject jsonObject = new JSONObject();
-                    System.out.println(rst.getString(1));
                     jsonObject.put("city", rst.getString(1));
                     jsonObject.put("date",rst.getString(2));
                     jsonObject.put("temper",rst.getString(3));
@@ -47,11 +46,8 @@ public class ConnectDB {
                     jsonArray.add(jsonObject);
                 }
                     rst.close();
-
             }
-
                 obj.put("weather", jsonArray);
-
             }
             finally {
                 state.close();
@@ -61,7 +57,6 @@ public class ConnectDB {
         }
         return obj;
     }
-
     private Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/weather?useUnicode=true&characterEncoding=utf8";
         String username = "pogoda";

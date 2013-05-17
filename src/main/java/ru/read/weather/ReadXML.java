@@ -41,14 +41,6 @@ public class ReadXML {
                 Node node = nodeList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE){
                     Element element = (Element) node;
-                /*    System.out.println("Температура: "+element.getElementsByTagName("temperature").item(0).getTextContent());
-                    System.out.println("Текущая погода: "+element.getElementsByTagName("weather_type").item(0).getTextContent());
-                    System.out.println("Ветер: "+element.getElementsByTagName("wind_direction").item(0).getTextContent());
-                    System.out.println("Скорость ветра: "+element.getElementsByTagName("wind_speed").item(0).getTextContent());
-                    System.out.println("Влажность: "+element.getElementsByTagName("humidity").item(0).getTextContent());
-                    System.out.println("Давление в мм: "+element.getElementsByTagName("pressure").item(0).getTextContent());
-                    System.out.println("Время: "+element.getElementsByTagName("observation_time").item(0).getTextContent()); */
-                    //res.add(element.getElementsByTagName("observation_time").item(0).getTextContent());
                     String s = element.getElementsByTagName("observation_time").item(0).getTextContent();
                     s = s.replace('T',' ');
                     res.add(s);
