@@ -23,12 +23,18 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class ReadXML {
-    public List<String> read(){
+    public List<String> read(Integer id){
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         List<String> res = new ArrayList<String>();
+        String adress = "http://export.yandex.ru/weather-ng/forecasts/";
+        if (id == 1) adress=adress.concat(CEK);
+        else if (id == 2) adress = adress.concat(MOW);
+        else if (id == 3) adress = adress.concat(IEV);
+        adress = adress.concat(".xml");
+        System.out.print(adress);
         try {
             builder = factory.newDocumentBuilder();
-            url = new URL("http://export.yandex.ru/weather-ng/forecasts/28642.xml");
+            url = new URL(adress);
             doc = builder.parse(String.valueOf(url));
             doc.getDocumentElement().normalize();
             NodeList nodeList = doc.getElementsByTagName("fact");
@@ -69,4 +75,7 @@ public class ReadXML {
     private URL url;
     private DocumentBuilder builder;
     private Document doc;
+    private final String CEK = "28642";
+    private final String MOW = "27612";
+    private final String IEV = "33345";
 }

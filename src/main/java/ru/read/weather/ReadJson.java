@@ -21,12 +21,18 @@ import java.util.Scanner;
  * To change this template use File | Settings | File Templates.
  */
 public class ReadJson {
-    public List<String> getJson(){
+    public List<String> getJson(Integer id){
         List<String> info = new ArrayList<String>();
+        String adress = "http://api.openweathermap.org/data/2.1/weather/city/";
+        if (id == 1) adress=adress.concat(CEK);
+        else if (id == 2) adress = adress.concat(MOW);
+        else if (id ==3) adress = adress.concat(IEV);
+        adress = adress.concat("?units=metric");
+        System.out.print(adress);
         json="";
         try {
             try{
-            url = new URL("http://api.openweathermap.org/data/2.1/weather/city/1508291?units=metric");
+            url = new URL(adress);
             in = url.openStream();
             scanner = new Scanner(in);
             while (scanner.hasNext()){
@@ -75,4 +81,7 @@ public class ReadJson {
     private String json;
     private InputStream in;
     private Scanner scanner;
+    private final String CEK = "1508291";
+    private final String MOW = "524901";
+    private final String IEV = "703448";
 }

@@ -11,9 +11,9 @@
 
 </head>
 <body class="grad">
-<h1>Погода в Челябинске</h1>
+<h1>Погода</h1>
 <br>
-<form >
+<form>
     <h3>Выберите сайт</h3>
         <label>
             <select name="sel">
@@ -24,7 +24,7 @@
         </label>
 
      <a href="#" class="button" onclick="refresh()">Обновить данные</a>
-</form> <br><br>
+</form>
 <script type="text/javascript">
     $('select[name="sel"]').change(function(){
         if($(this).val()=='s1') getWeather(1);
@@ -32,7 +32,14 @@
         if($(this).val()=='s3') getWeather(3);
     });
 </script>
+<br>
 
+<form>
+    <label>
+        <input id="periodId" size="5" value="сек">
+    </label>
+    <a href="#" class="button" onclick="refreshPeriod()">Период обновления</a>
+</form>
 
 </body>
 </html>

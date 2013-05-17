@@ -20,12 +20,18 @@ import java.util.Scanner;
  * To change this template use File | Settings | File Templates.
  */
 public class ForecasIO {
-    public List<String> getForecastIO(){
+    public List<String> getForecastIO(Integer id){
         List<String> res = new ArrayList<String>();
+        String adress = "https://api.forecast.io/forecast/096facb7680d91c266c4597089403f4f/";
+        if (id == 1) adress=adress.concat(CEK);
+        else if (id == 2) adress = adress.concat(MOW);
+        else if (id == 3)adress = adress.concat(IEV);
+        adress = adress.concat("?units=si");
+        System.out.print(adress);
         json = "";
         try{
             try{
-                url = new URL("https://api.forecast.io/forecast/096facb7680d91c266c4597089403f4f/55.1777,61.3006?units=si");
+                url = new URL(adress);
                 io = url.openStream();
                 in = new Scanner(io);
                 while (in.hasNext()){
@@ -65,4 +71,7 @@ public class ForecasIO {
     private String json;
     private Scanner in;
     private InputStream io;
+    private final String CEK = "55.1777,61.3006";
+    private final String MOW = "55.7570,37.6150";
+    private final String IEV = "50.4506,30.5243";
 }
