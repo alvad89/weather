@@ -27,7 +27,6 @@ public class ForecasIO {
         else if (id == 2) adress = adress.concat(MOW);
         else if (id == 3)adress = adress.concat(IEV);
         adress = adress.concat("?units=si");
-        System.out.print(adress);
         json = "";
         try{
             try{

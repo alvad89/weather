@@ -4,8 +4,6 @@ import ru.read.weather.ForecasIO;
 import ru.read.weather.ReadJson;
 import ru.read.weather.ReadXML;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,31 +14,37 @@ import java.util.TimerTask;
  */
 public class Refresh {
     public void refresh(final Long period){
-
-        final Timer timer = new Timer();
-        final TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                WriteDB wr = new WriteDB();
-                ReadXML readXML = new ReadXML();
-                ReadJson json = new ReadJson();
-                ForecasIO forecasIO = new ForecasIO();
-                for (int i=1; i<4; i++){
-                    wr.write(i,1,readXML.read(i));
-                    wr.write(i,2,json.getJson(i));
-                    wr.write(i,3,forecasIO.getForecastIO(i));}
-                System.out.println("OOOOKKKK!!!!!!");
-            }
-        };
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true){
-                    timer.schedule(task,period);
-                }
-
-            }
-        }).start();
-
+        per = period;
+        start();
     }
+
+    public void stop(){
+        potok = null;
+    }
+    public void start(){
+        Thread thisThread = Thread.currentThread();
+        System.out.println("OK!");
+        while (potok == Thread.currentThread()){
+            System.out.println("OK!!!");
+            try {
+                Thread.sleep(per);
+            } catch (InterruptedException e) {
+            }
+            write();
+
+        }
+    }
+    public void write(){
+        WriteDB wr = new WriteDB();
+        ReadXML readXML = new ReadXML();
+        ReadJson json = new ReadJson();
+        ForecasIO forecasIO = new ForecasIO();
+        for (int i=1; i<4; i++){
+            wr.write(i,1,readXML.read(i));
+            wr.write(i,2,json.getJson(i));
+            wr.write(i,3,forecasIO.getForecastIO(i));}
+        System.out.println("OK!");
+    }
+    private volatile Thread potok;
+    private Long per;
 }

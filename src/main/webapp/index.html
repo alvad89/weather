@@ -25,6 +25,7 @@
 
      <a href="#" class="button" onclick="refresh()">Обновить данные</a>
 </form>
+
 <script type="text/javascript">
     $('select[name="sel"]').change(function(){
         if($(this).val()=='s1') getWeather(1);
@@ -36,10 +37,12 @@
 
 <form>
     <label>
-        <input id="periodId" size="5" value="сек">
+        <input id="periodId" size="5" >
     </label>
     <a href="#" class="button" onclick="refreshPeriod()">Период обновления</a>
 </form>
+<p style="font-size: 14px; color: #fff">Период указывается в секундах</p>
+<br>
 
 </body>
 </html>

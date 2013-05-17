@@ -25,7 +25,6 @@ public class ConnectDB {
                 state = getConnection().prepareStatement("SELECT City.City,day,temper,typeWeather,speedWing,degWing,pressure,humidity,cloudCover,visibility,precipIntensity,dewPoint,ozone from Weather LEFT JOIN City on City.idCity=Weather.City_idCity where Weather.Site_idSite=? and City_idCity=? order by day DESC limit 1");
                 state.setInt(1,idSite);
                 state.setInt(2,i);
-                System.out.println(state);
                 ResultSet rst = state.executeQuery();
                 while (rst.next()){
                     JSONObject jsonObject = new JSONObject();
@@ -60,7 +59,6 @@ public class ConnectDB {
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        System.out.println(obj);
         return obj;
     }
 
